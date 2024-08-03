@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body class="background">
+    {{> header showSignout=true}}
+    <main>
+        <div class="container2">
+            <div class="books-container">
+                <h2>Available Books</h2>
+                <form id="borrow-form" action="/borrow" method="POST">
+                    {{#each availableBooks}}
+                    <input type="checkbox" id="{{ID}}" name="books" value="{{ID}}" class="borrow-checkbox">
+                    <label for="{{ID}}">{{Title}}</label><br>
+                    {{/each}}
+                    <button type="submit" id="borrow-button" disabled>Borrow</button>
+                </form>
+            </div>
+            <div class="user-info">
+                <p id="user-email">{{username}}</p>
+                <h2>Borrowed Books</h2>
+                <form id="return-form" action="/return" method="POST">
+                    {{#each borrowedBooks}}
+                    <input type="checkbox" id="{{ID}}" name="books" value="{{ID}}" class="return-checkbox">
+                    <label for="{{ID}}">{{Title}}</label><br>
+                    {{/each}}
+                    <button type="submit" id="return-button" disabled>Return</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll('.borrow-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => {
+                document.getElementById('borrow-button').disabled = !document.querySelectorAll('.borrow-checkbox:checked').length;
+            });
+        });
+
+        document.querySelectorAll('.return-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => {
+                document.getElementById('return-button').disabled = !document.querySelectorAll('.return-checkbox:checked').length;
+            });
+        });
+    </script>
+</body>
+
+</html>

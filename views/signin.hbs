@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body class="background">
+    {{> header}}
+    <div class="container">
+        <main>
+            <section class="signin-form">
+                <form id="signin-form" action="/signin" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+                {{#if error}}
+                <p style="color:red">{{error}}</p>
+                {{/if}}
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
